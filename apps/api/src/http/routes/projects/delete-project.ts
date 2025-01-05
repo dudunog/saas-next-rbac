@@ -43,7 +43,7 @@ export async function deleteProject(app: FastifyInstance) {
         })
 
         if (!project) {
-          throw new BadRequestError('Project not found')
+          throw new BadRequestError('Project not found.')
         }
 
         const authProject = projectSchema.parse(project)
