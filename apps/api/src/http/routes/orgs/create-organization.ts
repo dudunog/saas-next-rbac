@@ -45,27 +45,27 @@ export async function createOrganization(app: FastifyInstance) {
               'Another organization with same domain already exists.',
             )
           }
+        }
 
-          const organization = await prisma.organization.create({
-            data: {
-              name,
-              slug: createSlug(name),
-              domain,
-              shouldAttachUsersByDomain,
-              ownerId: userId,
-              members: {
-                create: {
-                  userId,
-                  role: 'ADMIN',
-                },
+        const organization = await prisma.organization.create({
+          data: {
+            name,
+            slug: createSlug(name),
+            domain,
+            shouldAttachUsersByDomain,
+            ownerId: userId,
+            members: {
+              create: {
+                userId,
+                role: 'ADMIN',
               },
             },
-          })
+          },
+        })
 
-          return reply.status(201).send({
-            organizationId: organization.id,
-          })
-        }
+        return reply.status(201).send({
+          organizationId: organization.id,
+        })
       },
     )
 }
