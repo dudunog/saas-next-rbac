@@ -8,12 +8,12 @@ import { createSlug } from '@/utils/create-slug'
 
 import { BadRequestError } from '../_errors/bad-request-error'
 
-export async function createOrganizaation(app: FastifyInstance) {
+export async function createOrganization(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
     .post(
-      '/organization',
+      '/organizations',
       {
         schema: {
           tags: ['organizations'],
