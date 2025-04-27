@@ -1,7 +1,5 @@
 import { FormEvent, useState, useTransition } from 'react'
 
-import { signInWithEmailAndPassword } from '@/app/auth/sign-in/actions'
-
 interface FormState {
   success: boolean
   message: string | null
@@ -29,7 +27,7 @@ export function useFormState(
     const data = new FormData(form)
 
     startTransition(async () => {
-      const state = await signInWithEmailAndPassword(data)
+      const state = await action(data)
 
       if (state.success === true && onSuccess) {
         await onSuccess()
