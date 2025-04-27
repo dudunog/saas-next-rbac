@@ -14,13 +14,13 @@ export async function signInWithPassword({
   password,
 }: SignInWithPasswordRequest) {
   const result = await api
-    .post<SignInWithPasswordResponse>('sessions/password', {
+    .post('sessions/password', {
       json: {
         email,
         password,
       },
     })
-    .json()
+    .json<SignInWithPasswordResponse>()
 
   return result
 }
