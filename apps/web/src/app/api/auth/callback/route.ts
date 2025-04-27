@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { signInWithGithub } from '@/http/sign-in-with-github'
 
 export async function GET(request: NextRequest) {
-  console.log('chegou aqui!!')
   const searchParams = request.nextUrl.searchParams
 
   const code = searchParams.get('code')
