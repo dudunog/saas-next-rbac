@@ -80,7 +80,6 @@ export async function authenticateWithGithub(app: FastifyInstance) {
         })
         .parse(githubUserData)
 
-      console.log('githubUserData:', githubUserData)
       if (email === null) {
         throw new BadRequestError(
           'Your Github account must have an email to authenticate',
