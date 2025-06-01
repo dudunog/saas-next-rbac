@@ -3,7 +3,8 @@
 import { HTTPError } from 'ky'
 import { z } from 'zod'
 
-// import { createProject } from '@/http/create-project'
+import { getCurrentOrg } from '@/auth/auth'
+import { createProject } from '@/http/create-project'
 
 const projectSchema = z.object({
   name: z.string().min(4, { message: 'Please include at least 4 characters.' }),
@@ -21,12 +22,13 @@ export async function createProjectAction(data: FormData) {
 
   const { name, description } = result.data
 
+  const currentOrg = await getCurrentOrg()
   try {
-    // await createProject({
-    //   name,
-    //   domain,
-    //   shouldAttachUsersByDomain,
-    // })
+    await createProject({
+      org: currentOrg!,
+      name,
+      description,
+    })
   } catch (err) {
     if (err instanceof HTTPError) {
       const { message } = await err.response.json()
